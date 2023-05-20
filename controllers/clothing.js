@@ -51,6 +51,14 @@ async function updateClothing(req, res) {
 async function deleteClothing(req, res) {
   try {
     const profileId = req.token.user.profile;
+    const { clothingId } = req.params;
+
+    const clothing = await Clothing.findByIdAndDelete(clothingId);
+    const profile = await Profile.findById(profileId);
+    profile.clothing.pull(clothingId);
+    profile.save();
+
+    res.status(200).json(clothing);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
