@@ -29,7 +29,11 @@ async function createContact(req, res) {
 
 async function updateContact(req, res) {
   try {
-    const profileId = req.token.user.profile;
+    const { contactId, details } = req.body;
+
+    const contact = await Contact.findByIdAndUpdate(contactId, details);
+
+    res.status(200).json(contact);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
