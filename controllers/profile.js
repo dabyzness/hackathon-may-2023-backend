@@ -20,7 +20,8 @@ async function getProfile(req, res) {
 
 async function updateProfile(req, res) {
   try {
-    const { profileId, details } = req.body;
+    const profileId = req.token.user.profile;
+    const { details } = req.body;
 
     const profile = await Profile.findById(profileId);
 

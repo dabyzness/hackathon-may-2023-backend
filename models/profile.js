@@ -47,6 +47,7 @@ const profileSchema = new mongoose.Schema({
   clothing: [{ type: mongoose.Schema.Types.ObjectId, ref: "Clothing" }],
   food: [{ type: mongoose.Schema.Types.ObjectId, ref: "Food" }],
   items: [{ type: mongoose.Schema.Types.ObjectId, ref: "Item" }],
+  contact: { type: mongoose.Schema.Types.ObjectId, ref: "Contact" },
 });
 
 const Profile = mongoose.model("Profile", profileSchema);
