@@ -1,36 +1,5 @@
 import mongoose from "mongoose";
 
-const clothingSchema = new mongoose.Schema({
-  state: {
-    type: String,
-    required: true,
-    enum: ["new", "used", "damaged", "stolen"],
-    default: "new",
-  },
-});
-
-const clothingInventorySchema = new mongoose.Schema({
-  hat: [clothingSchema],
-  shirt: [clothingSchema],
-  jacket: [clothingSchema],
-  pants: [clothingSchema],
-  socks: [clothingSchema],
-  shoes: [clothingSchema],
-  underwear: [clothingSchema],
-});
-
-const foodSchema = new mongoose.Schema({
-  group: {
-    type: String,
-    required: true,
-  },
-  format: {
-    type: String,
-    required: true,
-    enum: ["can", "perishable"],
-  },
-});
-
 const profileSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -58,10 +27,25 @@ const profileSchema = new mongoose.Schema({
       "homeless",
     ],
   },
-  clothing: {
-    type: clothingInventorySchema,
+  phone: {
+    type: String,
   },
-  food: [foodSchema],
+  age: { type: Number },
+  bio: { type: String },
+  children: { type: Number },
+  pets: { type: Number },
+  image: {
+    type: String,
+  },
+  lastMeal: { type: Date },
+  location: {
+    street1: { type: String },
+    street2: { type: String },
+  },
+  health: [{ type: Schema.Types.ObjectId, ref: "Health" }],
+  clothing: [{ type: Schema.Types.ObjectId, ref: "Clothing" }],
+  food: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  venmo: { type: String },
 });
 
 const Profile = mongoose.model("Profile", profileSchema);
