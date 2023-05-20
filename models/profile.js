@@ -42,10 +42,11 @@ const profileSchema = new mongoose.Schema({
     street1: { type: String },
     street2: { type: String },
   },
-  health: [{ type: Schema.Types.ObjectId, ref: "Health" }],
-  clothing: [{ type: Schema.Types.ObjectId, ref: "Clothing" }],
-  food: [{ type: Schema.Types.ObjectId, ref: "Food" }],
   venmo: { type: String },
+  health: [{ type: mongoose.Schema.Types.ObjectId, ref: "Health" }],
+  clothing: [{ type: mongoose.Schema.Types.ObjectId, ref: "Clothing" }],
+  food: [{ type: mongoose.Schema.Types.ObjectId, ref: "Food" }],
+  items: [{ type: mongoose.Schema.Types.ObjectId, ref: "Item" }],
 });
 
 const Profile = mongoose.model("Profile", profileSchema);

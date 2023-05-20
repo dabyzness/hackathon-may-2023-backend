@@ -18,7 +18,7 @@ const clothingSchema = new mongoose.Schema({
   quality: {
     type: String,
     required: true,
-    enum: ["new", "used", "damaged", "stinky"],
+    enum: ["new", "used", "damaged", "unlaundered"],
     default: "new",
   },
   possession: {

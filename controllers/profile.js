@@ -1,4 +1,9 @@
 import Profile from "../models/profile.js";
+import Health from "../models/health.js";
+import Clothing from "../models/clothing.js";
+import Food from "../models/food.js";
+import Item from "../models/items.js";
+import Contact from "../models/contact.js";
 
 async function getProfile(req, res) {
   try {
@@ -13,4 +18,27 @@ async function getProfile(req, res) {
   }
 }
 
-export { getProfile };
+async function updateProfile(req, res) {
+  try {
+    const { profileId, details } = req.body;
+
+    const profile = await Profile.findById(profileId);
+
+    if (!profile) {
+      throw new Error("Profile not found");
+    }
+
+    const updatedProfile = await Profile.findByIdAndUpdate(profileId, details);
+
+    if (!updatedProfile) {
+      throw new Error("Unable to update Profile");
+    }
+
+    res.status(200).json(updatedProfile);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+}
+
+export { getProfile, updateProfile };

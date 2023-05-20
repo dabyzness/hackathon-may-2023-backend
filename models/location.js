@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 const responseSchema = new mongoose.Schema({
-  profile: { type: Schema.Types.ObjectId, ref: "Profile" },
+  profile: { type: mongoose.Schema.Types.ObjectId, ref: "Profile" },
   comment: { type: String, required: true },
 });
 
 const ratingSchema = new mongoose.Schema({
-  profile: { type: Schema.Types.ObjectId, ref: "Profile" },
+  profile: { type: mongoose.Schema.Types.ObjectId, ref: "Profile" },
   rating: { type: Number, required: true, min: 1, max: 5 },
   comment: { type: String },
   responses: [responseSchema],
@@ -30,7 +30,7 @@ const locationSchema = new mongoose.Schema({
       enum: ["wifi", "power", "donation", "shower", "laundry", "pet", "lgbt"],
     },
   ],
-  owner: { type: Schema.Types.ObjectId, ref: "Profile" },
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: "Profile" },
   ratings: [ratingSchema],
 });
 

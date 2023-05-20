@@ -16,6 +16,7 @@ const healthSchema = new mongoose.Schema({
       "addiction",
       "psychological",
       "injury",
+      "medicine",
     ],
   },
 });
