@@ -37,7 +37,11 @@ async function createClothing(req, res) {
 
 async function updateClothing(req, res) {
   try {
-    const profileId = req.token.user.profile;
+    const { clothingId, details } = req.body;
+
+    const clothing = await Clothing.findByIdAndUpdate(clothingId, details);
+
+    res.status(200).json(clothing);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
