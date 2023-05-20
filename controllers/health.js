@@ -36,6 +36,14 @@ async function createHealth(req, res) {
 async function deleteHealth(req, res) {
   try {
     const profileId = req.token.user.profile;
+    const { healthId } = req.params;
+
+    const profile = await Profile.findById(profileId);
+    profile.health.pull(healthId);
+
+    profile.save();
+
+    res.status(200).json(healthId);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
