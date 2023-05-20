@@ -6,6 +6,7 @@ const router = Router();
 
 router.post("/", auth, contactController.createContact);
 router.put("/", auth, contactController.updateContact);
-router.delete("/", auth, contactController.deleteContact);
+
+router.delete("/:contactId", auth, contactController.deleteContact);
 
 export { router };
