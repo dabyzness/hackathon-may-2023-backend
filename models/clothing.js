@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const clothingSchema = new mongoose.Schema({
+  name: { type: String, required: true },
   category: {
     type: String,
     required: true,
@@ -17,14 +18,14 @@ const clothingSchema = new mongoose.Schema({
   },
   quality: {
     type: String,
-    required: true,
-    enum: ["new", "used", "damaged", "unlaundered"],
-    default: "new",
+    enum: ["new", "used", "damaged", "unlaundered", "placeholder"],
   },
   possession: {
     type: String,
-    required: true,
     enum: ["own", "trash", "need", "stolen"],
+  },
+  quantity: {
+    type: Number,
   },
 });
 
