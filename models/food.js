@@ -8,7 +8,7 @@ const foodSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ["can", "perishable", "pantry", "liquid", "other"],
+    enum: ["can", "perishable", "pantry", "liquid", "pet", "other"],
   },
   quality: {
     type: String,

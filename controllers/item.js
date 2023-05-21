@@ -13,6 +13,16 @@ async function getAllItem(req, res) {
 async function createItem(req, res) {
   try {
     const profileId = req.token.user.profile;
+
+    const item = await Item.create(req.body);
+
+    if (item.quality !== "placeholder") {
+      const profile = await Profile.findById(profileId);
+      profile.items.push(item);
+      await profile.save();
+    }
+
+    res.status(201).json(item);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
