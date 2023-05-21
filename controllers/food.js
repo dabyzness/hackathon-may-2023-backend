@@ -51,6 +51,14 @@ async function updateFood(req, res) {
 async function deleteFood(req, res) {
   try {
     const profileId = req.token.user.profile;
+    const { foodId } = req.params;
+
+    const profile = await Profile.findById(profileId);
+    const food = await Food.findByIdAndDelete(foodId);
+    profile.food.pull(foodId);
+    await profile.save();
+
+    res.status(200).json(foodId);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
