@@ -37,7 +37,13 @@ async function createItem(req, res) {
 
 async function updateItem(req, res) {
   try {
-    const profileId = req.token.user.profile;
+    const { itemId, details } = req.body;
+
+    const item = await Item.findByIdAndUpdate(itemId, details, {
+      new: true,
+    });
+
+    res.status(200).json(item);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
