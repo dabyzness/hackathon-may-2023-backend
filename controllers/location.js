@@ -3,7 +3,10 @@ import Location from "../models/location.js";
 
 async function getAllLocation(req, res) {
   try {
-    const locations = await Location.find({});
+    const locations = await Location.find({}).populate({
+      path: "ratings",
+      select: { path: "profile", select: "_id, username" },
+    });
 
     res.status(200).json(locations);
   } catch (error) {
@@ -24,7 +27,42 @@ async function createLocation(req, res) {
 
 async function updateLocation(req, res) {
   try {
+    const { locationId, field, action, details } = req.body;
     const profileId = req.token.user.profile;
+
+    const location = await Location.findById(locationId);
+    const profile = await Profile.findById(profileId);
+
+    if (field === "ratings") {
+      if (action === "add") {
+        location.ratings.push({ profile, ...details });
+      } else if (action === "remove") {
+        location.ratings.splice(
+          location.ratings.findIndex(
+            (rating) => details.ratingId.toString() === rating._id.toString()
+          ),
+          1
+        );
+      }
+    }
+
+    if (field === "tags") {
+      if (action === "add") {
+        location.tags.push(...details.tags);
+      } else if (action === "remove") {
+        location.tags.pull(details.tags);
+      }
+    }
+
+    if (!field || !action) {
+      Object.keys(details).forEach((key) => {
+        location[key] = details[key];
+      });
+    }
+
+    await location.save();
+
+    res.status(200).json(location);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
