@@ -71,7 +71,11 @@ async function updateLocation(req, res) {
 
 async function deleteLocation(req, res) {
   try {
-    const profileId = req.token.user.profile;
+    const { locationId } = req.params;
+
+    const location = await Location.findByIdAndDelete(locationId);
+
+    res.status(200).json(location);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
