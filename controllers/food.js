@@ -3,7 +3,13 @@ import Profile from "../models/profile.js";
 
 async function getAllFood(req, res) {
   try {
-    const profileId = req.token.user.profile;
+    const { category } = req.query;
+
+    const food = !category
+      ? await Food.find({ quality: "placeholder" })
+      : await Food.find({ category, quality: "placeholder" });
+
+    res.status(200).json(food);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
