@@ -53,6 +53,14 @@ async function updateItem(req, res) {
 async function deleteItem(req, res) {
   try {
     const profileId = req.token.user.profile;
+    const { itemId } = req.params;
+
+    const item = await Item.findByIdAndDelete(itemId);
+    const profile = await Profile.findById(profileId);
+    profile.items.pull(itemId);
+    profile.save();
+
+    res.status(200).json(itemId);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
