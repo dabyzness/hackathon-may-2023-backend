@@ -3,7 +3,13 @@ import Item from "../models/items.js";
 
 async function getAllItem(req, res) {
   try {
-    const profileId = req.token.user.profile;
+    const { category } = req.query;
+
+    const item = !category
+      ? await Item.find({ quality: "placeholder" })
+      : await Item.find({ category, quality: "placeholder" });
+
+    res.status(200).json(item);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
