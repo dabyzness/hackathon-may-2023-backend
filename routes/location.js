@@ -5,6 +5,7 @@ import * as locationController from "../controllers/location.js";
 const router = Router();
 
 router.get("/", locationController.getAllLocation);
+router.get("/:locationId", locationController.getLocation);
 
 router.post("/", auth, locationController.createLocation);
 router.put("/", auth, locationController.updateLocation);

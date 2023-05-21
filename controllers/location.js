@@ -14,6 +14,23 @@ async function getAllLocation(req, res) {
     res.status(500).json(error);
   }
 }
+
+async function getLocation(req, res) {
+  try {
+    const { locationId } = req.params;
+
+    const location = await Location.findById(locationId).populate({
+      path: "ratings",
+      select: { path: "profile", select: "_id, username" },
+    });
+
+    res.status(200).json(location);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+}
+
 async function createLocation(req, res) {
   try {
     const location = await Location.create(req.body);
@@ -82,4 +99,10 @@ async function deleteLocation(req, res) {
   }
 }
 
-export { getAllLocation, createLocation, updateLocation, deleteLocation };
+export {
+  getAllLocation,
+  getLocation,
+  createLocation,
+  updateLocation,
+  deleteLocation,
+};

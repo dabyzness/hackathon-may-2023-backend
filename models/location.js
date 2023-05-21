@@ -22,7 +22,16 @@ const locationSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ["shelter", "clinic", "food", "restaurant", "other", "government"],
+    enum: [
+      "church",
+      "doctor",
+      "food",
+      "domestic violence",
+      "finance",
+      "housing",
+      "resource",
+      "shelter",
+    ],
   },
   tags: [
     {
