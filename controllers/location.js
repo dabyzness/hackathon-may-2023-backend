@@ -11,12 +11,15 @@ async function getAllLocation(req, res) {
 }
 async function createLocation(req, res) {
   try {
-    const profileId = req.token.user.profile;
+    const location = await Location.create(req.body);
+
+    res.status(201).json(location);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
 }
+
 async function updateLocation(req, res) {
   try {
     const profileId = req.token.user.profile;
@@ -25,6 +28,7 @@ async function updateLocation(req, res) {
     res.status(500).json(error);
   }
 }
+
 async function deleteLocation(req, res) {
   try {
     const profileId = req.token.user.profile;

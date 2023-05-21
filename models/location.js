@@ -14,8 +14,8 @@ const ratingSchema = new mongoose.Schema({
 
 const locationSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  latitude: { type: String, required: true },
-  longitude: { type: String, required: true },
+  latitude: { type: Number, required: true },
+  longitude: { type: Number, required: true },
   phone: { type: String },
   image: { type: String },
   website: { type: String },
