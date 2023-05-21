@@ -10,6 +10,14 @@ const foodSchema = new mongoose.Schema({
     required: true,
     enum: ["can", "perishable", "pantry", "liquid", "other"],
   },
+  quality: {
+    type: String,
+    required: true,
+    enum: ["placeholder", "ready", "cook", "expired", "stolen"],
+  },
+  quantity: {
+    type: Number,
+  },
 });
 
 const Food = mongoose.model("Food", foodSchema);
