@@ -11,6 +11,7 @@ import { router as contactRouter } from "./routes/contact.js";
 import { router as healthRouter } from "./routes/health.js";
 import { router as clothingRouter } from "./routes/clothing.js";
 import { router as foodRouter } from "./routes/food.js";
+import { router as itemRouter } from "./routes/item.js";
 
 import "./config/database.js";
 
@@ -35,6 +36,7 @@ app.use("/api/contact", contactRouter);
 app.use("/api/health", healthRouter);
 app.use("/api/clothing", clothingRouter);
 app.use("/api/food", foodRouter);
+app.use("/api/item", itemRouter);
 
 app.use(function (req, res, next) {
   res.status(404).json({ err: "Not found" });
