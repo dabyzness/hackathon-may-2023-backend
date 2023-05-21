@@ -29,7 +29,9 @@ async function updateProfile(req, res) {
       throw new Error("Profile not found");
     }
 
-    const updatedProfile = await Profile.findByIdAndUpdate(profileId, details);
+    const updatedProfile = await Profile.findByIdAndUpdate(profileId, details, {
+      new: true,
+    });
 
     if (!updatedProfile) {
       throw new Error("Unable to update Profile");

@@ -31,7 +31,9 @@ async function updateContact(req, res) {
   try {
     const { contactId, details } = req.body;
 
-    const contact = await Contact.findByIdAndUpdate(contactId, details);
+    const contact = await Contact.findByIdAndUpdate(contactId, details, {
+      new: true,
+    });
 
     res.status(200).json(contact);
   } catch (error) {

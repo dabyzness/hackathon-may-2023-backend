@@ -39,7 +39,9 @@ async function updateClothing(req, res) {
   try {
     const { clothingId, details } = req.body;
 
-    const clothing = await Clothing.findByIdAndUpdate(clothingId, details);
+    const clothing = await Clothing.findByIdAndUpdate(clothingId, details, {
+      new: true,
+    });
 
     res.status(200).json(clothing);
   } catch (error) {

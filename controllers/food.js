@@ -37,7 +37,11 @@ async function createFood(req, res) {
 
 async function updateFood(req, res) {
   try {
-    const profileId = req.token.user.profile;
+    const { foodId, details } = req.body;
+
+    const food = await Food.findByIdAndUpdate(foodId, details, { new: true });
+
+    res.status(200).json(food);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
