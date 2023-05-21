@@ -3,7 +3,9 @@ import Location from "../models/location.js";
 
 async function getAllLocation(req, res) {
   try {
-    const profileId = req.token.user.profile;
+    const locations = await Location.find({});
+
+    res.status(200).json(locations);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
